@@ -1,3 +1,5 @@
+#!/opt/local/bin/python
+
 import json
 import os
 import sys
@@ -14,12 +16,44 @@ def log(info):
 
 def login():
     url = 'http://192.168.50.3:8080/eportal/InterFace.do?method=login'
-    config_file = os.environ.get('AUTO_NET_RECONNECT_CONFIG_FILE', "content")
-    with open(config_file, "r") as f:
-        data = f.read().strip('"').strip("'")
-    header = {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    # config_file = os.environ.get('AUTO_NET_RECONNECT_CONFIG_FILE', "content")
+    # with open(config_file, "r") as f:
+    #     data = f.read().strip('"').strip("'")
+    # header = {
+    #     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    # }
+
+    # 以下信息需要自己抓包
+    #<------将抓包得到的headers内容填写到键值对中------>
+    headers={
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.9',
+        'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
+        'Cache-Control':'no-cache',
+        'Connection':'keep-alive',
+        'Content-Length':'', #填写抓包得到的值
+        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+        'Cookie': '', #填写抓包得到的cookie
+        'Host':'', #填写抓包得到的host
+        'Origin':'', #填写抓包得到的origin
+        'Pragma':'no-cache',
+        'Referer':'' #填写抓包得到的referer
     }
+    #<------headers结束------>
+ 
+    #<------将抓包得到的载荷内容填写到键值对中------>
+    data={
+        'userId':'', #填写抓包得到的userId
+        'password':'', #填写抓包得到的password
+        'service':'', #填写抓包得到的service
+        'queryString':'',
+        'operatorPwd':'',
+        'operatorUserId':'',
+        'validcode':'',
+        'passwordEncrypt':'false' #填写抓包得到的passwordEncrypt
+    }
+    #<------载荷结束------>
 
     try:
         response = requests.post(url, data, headers=header, timeout=10)
