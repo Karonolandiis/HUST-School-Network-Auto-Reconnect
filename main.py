@@ -1,25 +1,29 @@
 #!/opt/local/bin/python
 """
-Author: Yiqian Qian
+Author: Pion Qiu
 Description: file content
-Date: 2023-04-19 15:48:49
-LastEditors: Yiqian Qian
-LastEditTime: 2023-04-19 15:51:03
-FilePath: /undefined/Users/yiqianqian/Library/Mobile Documents/com~apple~CloudDocs/Development/HUST-School-Network-Auto-Reconnect/main.py
+Date: 2023-04-19 20:45
+LastEditors: Pion Qiu
+LastEditTime: 2023-04-19 20:45
+
 """
 
 import json
 import os
-import sys
 import time
 import requests
+import subprocess
+import datetime 
 
+os.environ["AUTO_NET_RECONNECT_LOG_FILE"] = "/Applications/HUST-School-Network-Auto-Reconnect/connect.log"
 
 def log(info):
     log_file = os.environ.get("AUTO_NET_RECONNECT_LOG_FILE", "connect.log")
-    print(info.strip())
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # 获取当前时间并格式化
+    log_info = f"{now} {info.strip()}"
+    print(log_info)
     with open(log_file, "a") as f:
-        f.write(info.strip() + "\n")
+        f.write(log_info + "\n")
 
 
 def login():
@@ -40,11 +44,11 @@ def login():
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
         "Cache-Control": "no-cache",
         "Connection": "keep-alive",
-        "Content-Length": "",  # 填写抓包得到的值
+        "Content-Length": "879",  # 填写抓包得到的值
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "Cookie": "",  # 填写抓包得到的cookie
-        "Host": "",  # 填写抓包得到的host
-        "Origin": "",  # 填写抓包得到的origin
+        "Host": "192.168.50.3:8080",  # 填写抓包得到的host
+        "Origin": "http://192.168.50.3:8080",  # 填写抓包得到的origin
         "Pragma": "no-cache",
         "Referer": "",  # 填写抓包得到的referer
     }
@@ -55,11 +59,11 @@ def login():
         "userId": "",  # 填写抓包得到的userId
         "password": "",  # 填写抓包得到的password
         "service": "",  # 填写抓包得到的service
-        "queryString": "",
+        "queryString": "",# 填写抓包得到的queryString
         "operatorPwd": "",
         "operatorUserId": "",
         "validcode": "",
-        "passwordEncrypt": "false",  # 填写抓包得到的passwordEncrypt
+        "passwordEncrypt": "true",  # 填写抓包得到的passwordEncrypt
     }
     # <------载荷结束------>
 
@@ -81,23 +85,32 @@ def login():
         log("login 连接异常:" + str(info))
 
 
-def ping(host, n):
-    cmd = "ping {} {} {} > ping.log".format(
-        "-n" if sys.platform.lower() == "win32" else "-c",
-        n,
-        host,
-    )
-    return 0 == os.system(cmd)
 
-
-def pong():
-    return ping("202.114.0.242", 4) or ping("8.8.8.8", 4)
-
+def check_internet():
+    """
+    检查是否有互联网连接
+    :return: True表示有互联网连接，False表示没有
+    """
+    try:
+        url = "http://www.aliyun.com"
+        # 使用curl获取HTTP头信息，并筛选包含Content-Length关键字的行
+        cmd = ["curl", "-sI", url, "|", "grep", "Content-Length", "|", "awk", "-F': '", "'{print $2}'"]
+        output = subprocess.check_output(" ".join(cmd), shell=True)
+        Content_Length = output.decode().strip()
+        if Content_Length == '500':#未认证时curl待测url会重定向到认证页面，已知认证页面HTTP头信息中Content-Length为500，若为其他值则认为已认证
+            return False
+        else:
+            return True
+    except Exception:
+        return False
 
 if __name__ == "__main__":
     while True:
-        if pong():
-            time.sleep(5)
+        if check_internet():
+            #print('connected')#测试使用
+            time.sleep(1)
         else:
+            #print('not connected')#测试使用
             login()
-            time.sleep(10)
+            time.sleep(1)            
+

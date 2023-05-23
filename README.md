@@ -1,6 +1,6 @@
-# Fix "认证设备超时，请稍后重试"
+# Replace "ping" with "curl"
 
-This repo is forked from [auto-connect-school-network](https://github.com/Kingdo777/auto-connect-school-network), and fixed the problem "认证设备超时，请稍后重试", detailed intros please refer to the original repo.
+This repo is forked from [HUST-School-Network-Auto-Reconnect](https://github.com/QYQSDTC/HUST-School-Network-Auto-Reconnect) which is forked from [auto-connect-school-network](https://github.com/Kingdo777/auto-connect-school-network). In order to address the issue of being unable to determine network connectivity using "ping" due to the inability to proxy network layer data when utilizing the "TUN/enhance mode" of Clash/Surge, I substituted "ping" with "curl" for evaluating network connectivity. Detailed intros please refer to the original repo.
 
 # 抓包
 
