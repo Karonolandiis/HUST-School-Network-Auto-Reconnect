@@ -15,7 +15,7 @@ import requests
 import subprocess
 import datetime 
 
-os.environ["AUTO_NET_RECONNECT_LOG_FILE"] = "log文件所在地址/connect.log"
+os.environ["AUTO_NET_RECONNECT_LOG_FILE"] = "～/Desktop/connect.log" #log文件路径
 
 def log(info):
     log_file = os.environ.get("AUTO_NET_RECONNECT_LOG_FILE", "connect.log")
