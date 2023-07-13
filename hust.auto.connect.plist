@@ -4,19 +4,17 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>hust.auto.reconnect</string>
+    <string>ruijie.auto.reconnect</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/opt/local/bin/python</string>
-      <string>main.py</string>
+      <string>/opt/local/bin/python</string> #所运行的python解释器路径
+      <string>/User/main.py</string>#所运行的python脚本所在的目录
     </array>
-    <key>WorkingDirectory</key>
-    <string>/Users/yiqianqian/Library/Mobile Documents/com~apple~CloudDocs/Development/华科校园网自动重连</string>
     <key>RunAtLoad</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/Users/yiqianqian/Library/Mobile Documents/com~apple~CloudDocs/Development/华科校园网自动重连/run.log</string>
+    <string>/var/log/ruijie.auto.connect.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/yiqianqian/Library/Mobile Documents/com~apple~CloudDocs/Development/华科校园网自动重连/error.log</string>
+    <string>/var/log/ruijie.auto.connect.log</string>
   </dict>
 </plist>
