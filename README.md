@@ -22,7 +22,7 @@ This repo is forked from [HUST-School-Network-Auto-Reconnect](https://github.com
 
 Mac 和 Linux 可以直接运行 main.py，windows 用户可以根据原 repo 的介绍自行搞。
 
-# Mac 后台运行
+# MacOS 后台运行
 
 把 ruijie.auto.connect.plist 拷贝到/Library/LaunchDaemons 目录下，并为其添加可执行权限`sudo chmod a+x ruijie.auto.connect.plist`,
 然后执行以下命令：
@@ -30,7 +30,8 @@ Mac 和 Linux 可以直接运行 main.py，windows 用户可以根据原 repo �
 ```bash
 sudo launchctl load ruijie.auto.connect.plist
 ```
-停止命令为
-、、、bash
+
+停止命令为：
+```bash
 sudo launchctl unload ruijie.auto.connect.plist
-、、、
+```
