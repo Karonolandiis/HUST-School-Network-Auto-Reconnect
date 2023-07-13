@@ -78,6 +78,8 @@ def login():
                 time.sleep(120)
             if msg == "正常上网时段为:日常06:00-23:59，请在以上时段内进行认证上网!":
                 time.sleep(1200)
+            if msg == "用户上线不超过10s，不允许抢占!":
+                time.sleep(30)
         else:
             log("login at --> " + time.asctime(time.localtime(time.time())))
         return
