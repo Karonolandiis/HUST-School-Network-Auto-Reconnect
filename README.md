@@ -24,9 +24,9 @@ Mac 和 Linux 可以直接运行 main.py，windows 用户可以根据原 repo �
 
 # Mac 后台运行
 
-把 hust.auto.connect.plist 拷贝到~/Library/LaunchAgents 目录下，并为其添加可执行权限`chmod a+x hust.auto.connect.plist`,
+把 ruijie.auto.connect.plist 拷贝到/Library/LaunchDaemons 目录下，并为其添加可执行权限`sudo chmod a+x ruijie.auto.connect.plist`,
 然后执行以下命令：
 
 ```bash
-launchctl bootstrap gui/501 hust.auto-connect.plist
+launchctl bootstrap gui/501 ruijie.auto.connect.plist
 ```
