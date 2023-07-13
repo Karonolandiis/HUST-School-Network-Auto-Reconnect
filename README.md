@@ -28,5 +28,9 @@ Mac 和 Linux 可以直接运行 main.py，windows 用户可以根据原 repo �
 然后执行以下命令：
 
 ```bash
-sudo launchctl bootstrap gui/501 ruijie.auto.connect.plist
+sudo launchctl load ruijie.auto.connect.plist
 ```
+停止命令为
+、、、bash
+sudo launchctl unload ruijie.auto.connect.plist
+、、、
