@@ -99,7 +99,7 @@ def check_internet():
         cmd = ["curl", "-sI", url, "|", "grep", "Content-Length", "|", "awk", "-F': '", "'{print $2}'"]
         output = subprocess.check_output(" ".join(cmd), shell=True)
         Content_Length = output.decode().strip()
-        if Content_Length == '500':#未认证时curl待测url会重定向到认证页面，已知认证页面HTTP头信息中Content-Length为500，若为其他值则认为已认证
+        if Content_Length == '500':#未认证时curl待测url地址会重定向到认证页面，已知认证页面HTTP头信息中Content-Length为500，若为其他值则认为已认证
             return False
         else:
             return True
