@@ -95,11 +95,11 @@ def check_internet():
     """
     try:
         url = "http://www.aliyun.com"
-        # 使用curl获取HTTP头信息，并筛选包含Content-Length关键字的行
-        cmd = ["curl", "-sI", url, "|", "grep", "Content-Length", "|", "awk", "-F': '", "'{print $2}'"]
-        output = subprocess.check_output(" ".join(cmd), shell=True)
-        Content_Length = output.decode().strip()
-        if Content_Length == '500':#未认证时curl待测url地址会重定向到认证页面，已知认证页面HTTP头信息中Content-Length为500，若为其他值则认为已认证
+        # 使用requests获取HTTP头信息，并筛选包含Content-Length关键字的行
+        response = requests.head(url)  # 发送 HEAD 请求获取头信息
+        Content_Length = response.headers.get('Content-Length')
+        #print(Content_Length)
+        if Content_Length == '500':#未认证时requests到待测url地址会重定向到认证页面，已知认证页面HTTP头信息中Content-Length为500，若为其他值则认为已认证
             return False
         else:
             return True
@@ -107,12 +107,18 @@ def check_internet():
         return False
 
 if __name__ == "__main__":
+    counter = 0
     while True:
+        counter +=1
         if check_internet():
-            #print('connected')#测试使用
-            time.sleep(1)
+            #now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            #if counter % 2 == 0:
+            #    print(f"\033[33m{now} : \033[41mConnected & Do Not Close!!!\033[0m")
+            #else:
+            #    print(f"\033[33m{now} : \033[31;43mConnected & Do Not Close!!!\033[0m")
+            time.sleep(60)
         else:
-            #print('not connected')#测试使用
+            #print('Not Connected')
             login()
-            time.sleep(1)            
+            time.sleep(60)
 

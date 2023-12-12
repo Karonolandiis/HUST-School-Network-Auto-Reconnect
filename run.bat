@@ -1,3 +1,1 @@
-pip3 install requests
-set AUTO_NET_RECONNECT_LOG_FILE=connect.log
-python3.exe .\main.py
+wt.exe -d "C:\Program Files\Autoconnect" -p "Windows PowerShell" --title "Auto Connect" "python .\main.py"
