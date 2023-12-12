@@ -12,7 +12,6 @@ import json
 import os
 import time
 import requests
-import subprocess
 import datetime 
 
 os.environ["AUTO_NET_RECONNECT_LOG_FILE"] = "～/Desktop/connect.log" #log文件路径

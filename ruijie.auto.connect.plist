@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
-         "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs$
 <plist version="1.0">
-  <dict>
+<dict>
     <key>Label</key>
-    <string>ruijie.auto.reconnect</string>
+    <string>ruijie.auto.connect</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/opt/local/bin/python</string> #所运行的python解释器路径
-      <string>/User/main.py</string>#所运行的python脚本所在的目录
+        <string>/usr/local/Caskroom/miniconda/base/bin/python3.10</string>
+        <string>main.py</string>
     </array>
-    <key>RunAtLoad</key>
-    <true/>
+    <key>WorkingDirectory</key>
+    <string>/Applications/Auto-Reconnect</string>
     <key>StandardOutPath</key>
     <string>/var/log/ruijie.auto.connect.log</string>
     <key>StandardErrorPath</key>
     <string>/var/log/ruijie.auto.connect.log</string>
-  </dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+</dict>
 </plist>
+

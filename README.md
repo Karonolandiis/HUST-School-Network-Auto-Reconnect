@@ -20,7 +20,15 @@ This repo is forked from [HUST-School-Network-Auto-Reconnect](https://github.com
 
 # 运行
 
-Mac 和 Linux 可以直接运行 main.py，windows 用户可以根据原 repo 的介绍自行搞。
+MacOS 和 Linux 安装好所需包后可以直接运行，
+```bash
+python main.py
+```
+Windows 用户需自行安装python和包后运行，
+```bash
+python .\main.py
+```
+或者在run.bat中，设置好工作路径；main.py中将检测是否联网后面的print取消注释。双击run.bat后将在终端的Power shell中运行，并实时打印网络连接状况。
 
 # MacOS 后台运行
 
